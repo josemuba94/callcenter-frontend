@@ -1,16 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'
+import { PaginadorComponent } from './paginador/paginador.component';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CalificacionesComponent } from './calificaciones/calificaciones.component';
+
+const routes: Routes = [
+  {path: '', redirectTo: '/calificaciones', pathMatch: 'full'},
+  {path: 'calificaciones', component: CalificacionesComponent},
+  {path: 'calificaciones/pagina/:pagina', component: CalificacionesComponent},
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CalificacionesComponent,
+    PaginadorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]

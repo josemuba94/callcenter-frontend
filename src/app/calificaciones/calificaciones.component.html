@@ -1,0 +1,40 @@
+<div class="card border-dark mt-3">
+    <div class="card-header"><h5>Calificador de conversaciones</h5></div>
+    <div class="card-body text-primary">
+
+        <div class="row">
+            <div class="col-md-10 input-group">
+                <div class="custom-file">
+                    <input (change)="seleccionarArchivo($event)" type="file" class="custom-file-input" id="archivo">
+                    <label class="custom-file-label" for="archivo">{{nombreArchivo}}</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" [routerLink]="['/calificaciones/pagina', 0]"
+                    [disabled]="!archivoSeleccionado">Procesar</button>
+            </div>
+        </div>
+
+        <h5 *ngIf="calificaciones?.length > 0" class="card-title mt-4 mb-2">Calificaciones</h5>
+
+        <table class="table table-bordered table-striped" *ngIf="calificaciones?.length > 0">
+            <thead>
+                <tr class="text-center">
+                    <th>Número de conversación</th>
+                    <th>Puntaje</th>
+                    <th><i class="fa fa-star"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let califiacion of calificaciones">
+                    <td class="text-center" style="width: 40%;"><strong>{{califiacion.conversacion}}</strong></td>
+                    <td class="text-center" style="width: 25%;">{{califiacion.puntaje}}</td>
+                    <td class="text-center" style="width: 35%;">
+                        <i *ngFor="let estrella of darEstrellas(califiacion.estrellas)" class="fa fa-star text-warning ml-1"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <paginador-nav *ngIf="paginador" [paginador]="paginador"></paginador-nav>
+    </div>
+</div>
